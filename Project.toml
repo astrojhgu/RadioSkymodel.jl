@@ -1,0 +1,7 @@
+name = "RadioSkymodel"
+uuid = "4fc4d13c-4bb6-11e9-389b-055b685533c0"
+authors = ["Gu Junhua <jhgu@nao.cas.cn>"]
+version = "0.1.0"
+
+[deps]
+Healpix = "9f4e344d-96bc-545a-84a3-ae6b9e1b672b"
