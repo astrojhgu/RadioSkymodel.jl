@@ -21,10 +21,7 @@ end
 
 
 function radec2gal(ra, dec)
-    result = Tuple{Float64, Float64}[]
-    for (r,d) in zip(ra, dec)
-        push!(result, AstroLib.euler(r, d, 1; FK4 = false, radians = true))
-    end
+    result = [AstroLib.euler(r, d, 1; FK4 = false, radians = true) for (r,d) in zip(ra, dec)]
     collect.(zip(result...))
 end
 
