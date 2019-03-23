@@ -21,8 +21,11 @@ end
 
 
 function radec2gal(ra, dec)
-    result = [AstroLib.euler(r, d, 1; FK4 = false, radians = true) for (r,d) in zip(ra, dec)]
-    collect.(zip(result...))
+    function conv(r,d)
+        AstroLib.euler(r, d, 1; FK4 = false, radians = true)
+    end
+    result = [ conv(r,d) for (r,d) in zip(ra, dec)]
+    (map(x->x[1], result), map(x->x[2], result))
 end
 
 function radec2θφ(ra, dec)
