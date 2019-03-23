@@ -56,4 +56,19 @@ function get_iqu(ra::Array, dec::Array, freq::Array, sm::SkyModelData)::Tuple{Ar
     (out_i/1e6, out_q/1e6, out_u/1e6)
 end
 
+function get_i(ra::Array, dec::Array, freq::Array, sm::SkyModelData)::Tuple{Array, Array, Array}
+    θ, φ=radec2θφ(ra, dec)
+    out_i = zeros(Float64, size(ra, 0 + 1),size(freq, 0 + 1))
+    for j in eachindex(ra)
+        println(j, " ", size(ra,1))
+        idx, wgt=Healpix.getinterpolRing(sm.resolution, θ[j], φ[j])
+        i0=sum(sm.i_template[i]*w for (i,w) in zip(idx, wgt))
+        beta=sum(sm.beta_template[i]*w for (i,w) in zip(idx, wgt))
+        i=i0.*(freq./sm.nu_0_i).^beta
+        out_i[j, :]=i
+    end
+    out_i/1e6
+end
+
+
 end # module
