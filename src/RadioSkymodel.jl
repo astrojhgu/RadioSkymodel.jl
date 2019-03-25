@@ -56,7 +56,7 @@ function get_iqu(ra::Array, dec::Array, freq::Array, sm::SkyModelData)::Tuple{Ar
     (out_i/1e6, out_q/1e6, out_u/1e6)
 end
 
-function get_i(ra::Array, dec::Array, freq::Array, sm::SkyModelData)::Tuple{Array, Array, Array}
+function get_i(ra::Array, dec::Array, freq::Array, sm::SkyModelData)::Array
     θ, φ=radec2θφ(ra, dec)
     out_i = zeros(Float64, size(ra, 0 + 1),size(freq, 0 + 1))
     for j in eachindex(ra)
